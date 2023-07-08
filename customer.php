@@ -141,9 +141,6 @@ while($row=mysqli_fetch_row($res)){
                         <a href="home.php" class="footer-logo">
                             <img src="icons/read.png" alt="footer_logo" class="img-fluid">
                         </a>
-                        <p class="footer-info-text text-white">
-                        “We read to know we're not alone.” 
-                        </p>
                         <div class="footer-social-link">
                             <h3>Follow Us</h3>
                             <ul>

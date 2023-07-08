@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 </head>
 
-<body style="background:#020a13;">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark mt-0" id="top">
+<body style="background:#A8A8FF;">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-0" id="top" style="background:#7878FF;">
       <div class="container-fluid">
         <ul class="navbar-nav">
           <a class="navbar-brand" href="home.php">
@@ -74,28 +74,24 @@
       <img src="img/hd3.jpg" alt="" class="d-block h-50" style="width:100%">
       <div class="carousel-caption">
         <h3 style="font-family: 'PT Sans Narrow', sans-serif;">Welcome to Bookshelf</h3>
-        <p>Explore all the books.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="img/hd1.jpg" alt="" class="d-block h-50" style="width:100% ">
       <div class="carousel-caption">
         <h3 style="font-family: 'PT Sans Narrow', sans-serif; color:black;">Welcome to Bookshelf</h3>
-        <p style="color:black;">Explore all the books.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="img/hd2.jpg" alt="" class="d-block" style="width:100%">
       <div class="carousel-caption">
         <h3 style=" font-family: 'PT Sans Narrow', sans-serif; color:black;">Welcome to Bookshelf</h3>
-        <p style="color:black;">Explore all the books.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="img/hd4.jpg" alt="" class="d-block" style="width:100%">
       <div class="carousel-caption">
         <h3 style=" font-family: 'PT Sans Narrow', sans-serif;">Welcome to Bookshelf</h3>
-        <p>Explore all the books.</p>
       </div>
     </div>
   </div>
@@ -110,45 +106,49 @@
 </div>
 <?php
   $con=mysqli_connect("localhost","root","","bookshelf");
-  $hp=1;$kb=1;$m=1;
+
   $bname=array();
   $bprice=array();
   $bimg=array();
   $brating=array();
   $bauthor=array();
+  $bgenre=array();
 
   if(isset($_POST['search']))
   {
     $search;
     $search=$_POST["p_name"];
     $con=mysqli_connect('localhost','root','','bookshelf');
-    $query="select * from product where p_name='$search' OR author like '%$search';";
+    $query="select * from product where p_name='$search' OR genre='$search' OR author like '%$search';";
     $res=mysqli_query($con,$query);
     
     
     while($row=mysqli_fetch_row($res))
     {
+      $id=$row[0];
       $name=$row[1];
       $price=$row[5];
       $image=$row[6];
       $rating=$row[3];
       $author=$row[7];
       $review=$row[4];
+      $genre=$row[2];
        
       ?>
-      <div class="container text-white" style="border: 3px solid #006FBF; background: #202020; margin-top:30px; margin-bottom:30px;">
+      <div class="container" style="border: 3px solid #006FBF; background: #9898FF; margin-top:30px; margin-bottom:30px;">
         <div class="col">
-        <div class="card shadow p-2 bg-dark text-white" style="width: 400px; margin-left:30%;" >
-                  <img class="card-img-top" src="img/books/<?php echo $image ?>.jpg" alt="Card image cap">
+        <div class="card shadow p-2" style="width: 400px; margin-left:30%; background: #C8C8FF;" >
+                  <img style="height: 450px;" class="card-img-top" src="img/books/<?php echo $image ?>" alt="Card image cap">
                   <div class="card-body">
                     <h4 class="card-title"><?php echo $name ?> </h4>
                     <h5 class="card-text"><?php echo $author ?> </h5>
+                    <p class="card-text"> Genre: <?php echo $genre ?></p>
                     <p class="card-text"> Rating: <?php echo $rating ?> &nbsp;|&nbsp; Price: <?php echo $price ?> </p>
-                    <form action="home.php" method="post"> <button class="btn" type="submit" name="<?php echo $image ?>"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
+                    <form action="home.php" method="post"> <button class="btn" type="submit" name="<?php echo $id ?>"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
+                    <h4>Details: </h4>
+                    <p><?php echo $review ?></p>
                   </div>
           </div>
-          <h4>Details: </h4>
-          <p><?php echo $review ?></p>
         </div>
       </div>
       
@@ -167,189 +167,205 @@
       array_push($bprice,$row[5]);
       array_push($bimg,$row[6]);
       array_push($bauthor,$row[7]);
+      array_push($bgenre,$row[2]);
     }
   
   
   
 ?>
-     <div class="text-white" style="background: #071b35; width:1420px; margin-left: auto; margin-right: auto;">
+     <div style="background: #9898FF; width:1420px; margin-left: auto; margin-right: auto;">
         <div class="row">
           
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[0] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[0] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[0] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[0] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[0] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[0] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[0] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[0] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[0] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="1"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[1] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[1] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[1] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[1] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[1] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[1] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[1] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[1] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[1] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="2"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[2] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[2] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[2] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[2] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[2] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[2] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[2] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[2] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[2] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="3"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[3] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[3] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[3] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[3] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[3] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[3] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[3] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[3] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[3] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="4"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[4] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[4] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[4] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[4] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[4] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[4] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[4] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[4] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[4] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="5"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[5] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[5] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[5] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[5] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[5] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[5] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[5] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[5] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[5] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="6"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[6] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[6] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[6] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[6] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[6] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[6] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[6] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[6] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[6] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="7"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[7] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[7] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[7] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[7] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[7] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[7] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[7] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[7] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[7] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="8"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[8] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[8] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[8] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[8] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[8] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[8] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[8] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[8] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[8] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="9"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[9] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[9] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[9] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[9] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[9] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[9] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[9] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[9] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[9] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="10"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[10] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[10] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[10] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[10] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[10] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[10] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[10] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[10] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[10] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="11"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[11] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[11] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[11] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[11] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[11] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[11] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[11] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[11] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[11] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="12"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[12] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[12] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[12] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[12] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[12] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[12] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[12] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[12] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[12] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="13"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[13] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[13] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[13] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[13] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[13] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[13] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[13] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[13] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[13] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="14"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[14] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[14] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[14] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[14] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[14] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[14] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[14] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[14] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[14] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="15"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
 
               </div>
@@ -357,36 +373,39 @@
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[15] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[15] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[15] ?> </h5>
-                <p class="card-text"><?php echo $bauthor[15] ?> </p><p class="card-title"><?php echo $bname[15] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[015] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[15] ?> </p>
+                <p class="card-text"><?php echo $bauthor[15] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[15] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[015] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[15] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="16"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[16] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[16] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[16] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[16] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[16] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[16] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[16] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[16] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[16] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="17"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[17] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[17] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[17] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[17] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[17] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[17] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[17] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[17] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[17] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="18"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
@@ -394,12 +413,13 @@
 
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[18] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[18] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[18] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[18] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[18] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[18] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[18] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[18] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[18] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="19"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
@@ -407,12 +427,13 @@
 
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[19] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[19] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[19] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[19] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[19] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[19] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[19] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[19] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[19] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="20"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
@@ -420,144 +441,156 @@
 
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[20] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[20] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[20] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[20] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[20] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[20] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[20] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[20] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[20] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="21"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[21] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[21] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[21] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[21] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[21] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[21] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[21] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[21] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[21] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="22"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[22] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[22] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[22] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[22] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[22] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[22] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[22] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[22] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[22] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="23"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[23] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[23] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[23] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[23] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[23] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[23] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[23] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[23] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[23] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="24"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[24] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[24] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[24] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[24] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[24] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[24] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[24] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[24] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[24] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="25"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[25] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[25] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[25] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[25] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[25] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[25] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[25] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[25] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[25] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="26"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[26] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[26] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[26] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[26] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[26] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[26] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[26] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[26] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[26] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="27"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[27] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[27] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[27] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[27] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[27] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[27] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[27] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[27] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[27] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="28"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[28] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[28] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[28] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[28] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[28] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[28] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[28] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[28] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[28] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="29"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[29] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[29] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[29] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[29] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[29] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[29] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[29] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[29] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[29] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="30"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[30] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[30] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[30] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[30] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[30] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[29] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[30] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[30] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[29] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="31"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
           </div>
 
           <div class="col">
-            <div class="card shadow mt-3 mb-2 mx-3 p-2 bg-dark text-white" style="width: 300px;" >
-              <img class="card-img-top" src="img/books/<?php echo $bimg[31] ?>.jpg" alt="Card image cap" height="400px" width="150px">
+            <div class="card shadow mt-3 mb-2 mx-3 p-2" style="width: 300px; background: #C8C8FF;"  >
+              <img class="card-img-top" src="img/books/<?php echo $bimg[31] ?>" alt="Card image cap" height="400px" width="150px">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $bname[31] ?> </h5>
                 <p class="card-text"><?php echo $bauthor[31] ?> </p>
-                <p class="card-text" style="padding-top:10px;"> Rating: <?php echo $brating[31] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[29] ?> </p>
+                <p class="card-text"> Genre: <?php echo $bgenre[31] ?></p>
+                <p class="card-text"> Rating: <?php echo $brating[31] ?> &nbsp;|&nbsp; Price: <?php echo $bprice[29] ?> </p>
                 <form action="home.php" method="post"> <button class="btn" type="submit" name="32"> <img src="icons/cart.png" alt="" height=40px width=40px></button></form>
               </div>
             </div>
@@ -601,9 +634,6 @@
                         <a href="home.php" class="footer-logo">
                             <img src="icons/read.png" alt="footer_logo" class="img-fluid">
                         </a>
-                        <p class="footer-info-text text-white">
-                        “We read to know we're not alone.” 
-                        </p>
                         <div class="footer-social-link">
                             <h3>Follow Us</h3>
                             <ul>

@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 </head>
-<body style="background:#002030;">
+<body style="background:#A8A8FF;">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark mt-0" id="top">
       <div class="container-fluid">
         <ul class="navbar-nav">
@@ -109,15 +109,15 @@
         }
 
     }?>
-    <div class="container text-white" style="background: #002030; margin-top:30px; margin-bottom:30px;">
+    <div class="container text-white" style="background: #A8A8FF; margin-top:30px; margin-bottom:30px;">
         <div class="col">
-            <table class="table table-dark m-0">
+            <table class="table m-0" style="background: #C8C8FF;">
                 <tr>
-                    <th class="border border-right">Item</th>
-                    <th class="border border-right">Image</th>
-                    <th class="border border-right">Genre</th>
-                    <th class="border border-right">Price</th>
-                    <th class="border border-right">Action</th>
+                    <th class="border-dark border-right border-left">Item</th>
+                    <th class="border-dark border-right">Image</th>
+                    <th class="border-dark border-right">Genre</th>
+                    <th class="border-dark border-right">Price</th>
+                    <th class="border-dark border-right">Action</th>
                     
                 </tr>
                 <?php
@@ -125,12 +125,12 @@
                 {
                 ?>
                 <tr>
-                    <td class="border border-right"> <?php echo $item_name[$i];?>    </td>
-                    <td class="border border-right"> <img src="img/books/<?php echo $item_img[$i];?>.jpg" width="200px" height="300">    </td>
-                    <td class="border border-right"><?php echo $item_genre[$i];?></td>
-                    <td class="border border-right"><?php echo $item_price[$i];?></td>
+                    <td class="border-dark border-right border-left"> <?php echo $item_name[$i];?>    </td>
+                    <td class="border-dark border-right"> <img src="img/books/<?php echo $item_img[$i];?>" width="200px" height="300">    </td>
+                    <td class="border-dark border-right"><?php echo $item_genre[$i];?></td>
+                    <td class="border-dark border-right"><?php echo $item_price[$i];?></td>
                     <form action="cart.php" method="post">
-                    	<td class="border border-right"><input type="submit" value="Remove Product" name="rmv<?php echo $i;?>" class="form-control btn float-left mb-3" style="background-color:#006FBF; color:white;"></td>
+                    	<td class="border-dark border-right"><input type="submit" value="Remove Product" name="rmv<?php echo $i;?>" class="form-control btn float-left mb-3" style="background-color:#006FBF; color:white;"></td>
                     </form>
                 </tr>
                 <?php
@@ -173,9 +173,6 @@
                         <a href="index.html" class="footer-logo">
                             <img src="icons/read.png" alt="footer_logo" class="img-fluid">
                         </a>
-                        <p class="footer-info-text text-white">
-                        “We read to know we're not alone.”  
-                        </p>
                         <div class="footer-social-link">
                             <h3>Follow Us</h3>
                             <ul>

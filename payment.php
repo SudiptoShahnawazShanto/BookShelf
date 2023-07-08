@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="payment.css">
 </head>
 
-<body style="background:#020a13;">
+<body style="background:#A8A8FF;">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark mt-0" id="top">
         <div class="container-fluid">
             <ul class="navbar-nav">
@@ -58,17 +58,21 @@
 
 <div class="container">
     <div class="row">
-        
         <div class="col-12 mt-4">
-            <div class="card p-3">
+            <div class="card p-3" style="background:#D8D8FF;">
+                <p class="mb-0 fw-bold h4">bKash/Rocket/Nagad Number: 01521-xxxxxx</p>
+            </div>
+        </div>
+        <div class="col-12 mt-4">
+            <div class="card p-3" style="background:#D8D8FF;">
                 <p class="mb-0 fw-bold h4">Payment Methods</p>
             </div>
         </div>
         <div class="col-12">
-            <div class="card p-3">
+            <div class="card p-3" style="background:#D8D8FF;">
 
 
-                <div class="card-body border p-0">
+                <div class="card-body border p-0" style="background:#A8A8FF;">
                     <p> <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample"> <span class="fw-bold">bKash</span></a> </p>
                     <div class="collapse p-3 show pt-0" id="collapseExample">
                         <div class="row">
@@ -77,7 +81,10 @@
                             </div>
                             <div class="col-lg-7">
                                 <form action="payment.php" class="form" method="post">
-                                    <div class="row">                                        
+                                    <div class="row">  
+                                        <div class="col-12">
+                                            <div class="form__div"> <input type="text" class="form-control" placeholder=" " name="bmail"> <label for="" class="form__label">Your Email</label> </div>
+                                        </div>                                      
                                         <div class="col-12">
                                             <div class="form__div"> <input type="text" class="form-control" placeholder=" " name="bnum"> <label for="" class="form__label">bKash Phone Number</label> </div>
                                         </div>
@@ -97,7 +104,7 @@
 
 
 
-                <div class="card-body border p-0">
+                <div class="card-body border p-0" style="background:#A8A8FF;">
                     <p> <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample"> <span class="fw-bold">Nagad</span></a> </p>
                     <div class="collapse p-3 pt-0" id="collapseExample">
                         <div class="row">
@@ -107,6 +114,9 @@
                             <div class="col-lg-7">
                                 <form action="payment.php" class="form" method="post">
                                     <div class="row">
+                                        <div class="col-12">
+                                            <div class="form__div"> <input type="text" class="form-control" placeholder=" " name="nmail"> <label for="" class="form__label">Your Email</label> </div>
+                                        </div>  
                                         <div class="col-12">
                                             <div class="form__div"> <input type="text" class="form-control" placeholder=" " name="nnum"> <label for="" class="form__label">Nagad Phone Number</label> </div>
                                         </div>
@@ -124,7 +134,7 @@
                 </div>
 
 
-                <div class="card-body border p-0">
+                <div class="card-body border p-0" style="background:#A8A8FF;">
                     <p> <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample"> <span class="fw-bold">Rocket</span></a> </p>
                     <div class="collapse p-3 pt-0" id="collapseExample">
                         <div class="row">
@@ -134,6 +144,9 @@
                             <div class="col-lg-7">
                                 <form action="payment.php" class="form" method="post">
                                     <div class="row">
+                                        <div class="col-12">
+                                            <div class="form__div"> <input type="text" class="form-control" placeholder=" " name="rmail"> <label for="" class="form__label">Your Email</label> </div>
+                                        </div>  
                                         <div class="col-12">
                                             <div class="form__div"> <input type="text" class="form-control" placeholder=" " name="rnum"> <label for="" class="form__label">Rocket Phone Number</label> </div>
                                         </div>
@@ -151,7 +164,7 @@
                 </div>
 
 
-                <div class="card-body border p-0">
+                <div class="card-body border p-0" style="background:#A8A8FF;">
                     <p> <a class="btn btn-primary w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample"> <span class="fw-bold">Cash on Delivery</span></a> </p>
                     <div class="collapse p-3 pt-0" id="collapseExample">
                         <div class="row">
@@ -161,6 +174,9 @@
                             <div class="col-lg-7">
                                 <form action="payment.php" class="form" method="post">
                                     <div class="row">                        
+                                        <div class="col-12">
+                                            <div class="form__div"> <input type="text" class="form-control" placeholder=" " name="cmail"> <label for="" class="form__label">Your Email</label> </div>
+                                        </div>
                                         <div class="col-6">
                                             <div class="form__div"> <input type="text" class="form-control" placeholder=" " name="nam"> <label for="" class="form__label">Name</label> </div>
                                         </div>
@@ -202,7 +218,7 @@
         $query="delete from cart where user=$id";
         $res=mysqli_query($con,$query);
        
-        echo "<script>alert('Payment Successfull')</script>";
+        echo "<script>alert('Payment Successfull! Check your email.')</script>";
         echo "<script>window.open('home.php','_self')</script>";
         
 
@@ -215,7 +231,7 @@
         $query="delete from cart where user=$id";
         $res=mysqli_query($con,$query);
        
-        echo "<script>alert('Payment Successfull')</script>";
+        echo "<script>alert('Payment Successfull! Check your email.')</script>";
         echo "<script>window.open('home.php','_self')</script>";
         
 
@@ -228,7 +244,7 @@
         $query="delete from cart where user=$id";
         $res=mysqli_query($con,$query);
        
-        echo "<script>alert('Payment Successfull')</script>";
+        echo "<script>alert('Payment Successfull! Check your email.')</script>";
         echo "<script>window.open('home.php','_self')</script>";
         
 
@@ -242,7 +258,7 @@
         $query="delete  from cart where user=$id";
         $res=mysqli_query($con,$query);
        
-        echo "<script>alert('Payment Successfull')</script>";
+        echo "<script>alert('Payment Successfull! Check your email.')</script>";
         echo "<script>window.open('home.php','_self')</script>";
         
 
@@ -257,9 +273,6 @@
                         <a href="index.html" class="footer-logo">
                             <img src="icons/read.png" alt="footer_logo" class="img-fluid">
                         </a>
-                        <p class="footer-info-text text-white">
-                        “We read to know we're not alone.” 
-                        </p>
                         <div class="footer-social-link">
                             <h3>Follow Us</h3>
                             <ul>
@@ -423,6 +436,157 @@
             
         </div>
         <!-- End Back to top -->
+        
 </footer>  
 
+<?php
+
+      use PHPMailer\PHPMailer\PHPMailer;
+      use PHPMailer\PHPMailer\SMTP;
+      use PHPMailer\PHPMailer\Exception;
+
+      require('PHPMailer/Exception.php');
+      require('PHPMailer/SMTP.php');
+      require('PHPMailer/PHPMailer.php');
+
+      
+
+      if(isset($_POST["bsub"])){
+          $email=$_POST["bmail"];
+
+                          $mail = new PHPMailer(true);
+
+                          try {
+                              $mail->isSMTP();                                            
+                              $mail->Host       = 'smtp.gmail.com';                     
+                              $mail->SMTPAuth   = true;                                  
+                              $mail->Username   = 'bookshelfprojectju@gmail.com';                     
+                              $mail->Password   = 'BookShelf1!';                              
+                              $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
+                              $mail->Port       = 465;                                    
+
+
+
+                              $mail->setFrom('bookshelfprojectju@gmail.com', 'BookShelf');
+                              $mail->addAddress($email);
+                              
+                              $mail->addAttachment('books/The Adventures of Huckleberry Finn.pdf');
+                              
+                              $mail->isHTML(true);                                
+                              $mail->Subject = 'Your Order Has Been Confirmed!';
+                              $mail->Body    = 'Congratulations! Your order has been confirmed. Here is a copy of your book.</b>';
+
+                              $mail->send();
+
+                          } catch (Exception $e) {
+                              echo "<script>alert('Confirmation Failed.')</script>";
+                          }
+
+      }
+
+      if(isset($_POST["nsub"])){
+        $email=$_POST["nmail"];
+
+                        $mail = new PHPMailer(true);
+
+                        try {
+                            $mail->isSMTP();                                            
+                            $mail->Host       = 'smtp.gmail.com';                     
+                            $mail->SMTPAuth   = true;                                  
+                            $mail->Username   = 'bookshelfprojectju@gmail.com';                     
+                            $mail->Password   = 'BookShelf1!';                              
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
+                            $mail->Port       = 465;                                    
+
+
+
+                            $mail->setFrom('bookshelfprojectju@gmail.com', 'BookShelf');
+                            $mail->addAddress($email);
+
+                            $mail->addAttachment('books/The Adventures of Huckleberry Finn.pdf');
+
+                            
+                            $mail->isHTML(true);                                
+                            $mail->Subject = 'Your Order Has Been Confirmed!';
+                            $mail->Body    = 'Congratulations! Your order has been confirmed. Here is a copy of your book.</b>';
+
+                            $mail->send();
+
+                        } catch (Exception $e) {
+                            echo "<script>alert('Confirmation Failed.')</script>";
+                        }
+
+    }
+
+    if(isset($_POST["rsub"])){
+        $email=$_POST["rmail"];
+
+                        $mail = new PHPMailer(true);
+
+                        try {
+                            $mail->isSMTP();                                            
+                            $mail->Host       = 'smtp.gmail.com';                     
+                            $mail->SMTPAuth   = true;                                  
+                            $mail->Username   = 'bookshelfprojectju@gmail.com';                     
+                            $mail->Password   = 'BookShelf1!';                              
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
+                            $mail->Port       = 465;                                    
+
+
+
+                            $mail->setFrom('bookshelfprojectju@gmail.com', 'BookShelf');
+                            $mail->addAddress($email);
+
+                            $mail->addAttachment('books/The Adventures of Huckleberry Finn.pdf');
+                            
+                            $mail->isHTML(true);                                
+                            $mail->Subject = 'Your Order Has Been Confirmed!';
+                            $mail->Body    = 'Congratulations! Your order has been confirmed. Here is a copy of your book.</b>';
+
+                            $mail->send();
+
+                        } catch (Exception $e) {
+                            echo "<script>alert('Confirmation Failed.')</script>";
+                        }
+
+    }
+
+    if(isset($_POST["csub"])){
+        $email=$_POST["cmail"];
+
+                        $mail = new PHPMailer(true);
+
+                        try {
+                            $mail->isSMTP();                                            
+                            $mail->Host       = 'smtp.gmail.com';                     
+                            $mail->SMTPAuth   = true;                                  
+                            $mail->Username   = 'bookshelfprojectju@gmail.com';                     
+                            $mail->Password   = 'BookShelf1!';                              
+                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
+                            $mail->Port       = 465;                                    
+
+
+
+                            $mail->setFrom('bookshelfprojectju@gmail.com', 'BookShelf');
+                            $mail->addAddress($email);
+
+                            $mail->addAttachment('books/The Adventures of Huckleberry Finn.pdf');
+
+                            
+                            $mail->isHTML(true);                                
+                            $mail->Subject = 'Your Order Has Been Confirmed!';
+                            $mail->Body    = 'Congratulations! Your order has been confirmed. Here is a copy of your book.</b>';
+
+                            $mail->send();
+
+                        } catch (Exception $e) {
+                            echo "<script>alert('Confirmation Failed.')</script>";
+                        }
+
+    }
+
+
+  ?>
+
 </body>
+</html>
