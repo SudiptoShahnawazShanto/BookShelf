@@ -3,15 +3,13 @@
 ## An Online Book Store
 
 
-<div align="center">
+<!-- <div align="center">
   <img src=".gif" alt="Bookshelf Video" width="100%" />
   <br>
 </div>
 
 <br/>
-<br/>
-
----
+<br/> -->
 
 <br/>
 
@@ -19,8 +17,8 @@
 ## Features
 
 - ### **Users can use the website to purchase books online** 
-- ### **Users can add/delete, manage their accounts** 
-- ### **The Website keeps records of the registrations** 
+- ### **Users can edit their accounts** 
+- ### **The website keeps records of the registrations** 
 - ### **Keeps the records of books** 
 - ### **User can search for books** 
 
