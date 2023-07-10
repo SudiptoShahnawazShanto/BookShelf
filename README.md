@@ -16,25 +16,15 @@
 
 ## Features
 
-- ### **Users can use the website to purchase books online** 
-- ### **Users can edit their accounts** 
-- ### **The website keeps records of the registrations** 
-- ### **Keeps the records of books** 
-- ### **User can search for books** 
+- ### Users can use the website to purchase books online** 
+- ### Users can edit their accounts** 
+- ### Users can search for books**
+- ### The website keeps records of the registrations and books** 
 
 <br/>
 <br/>
 
-## Software and Languages Used
 
-- ### **Client Side Scripting: HTML , CSS** 
-- ### **Server Side Scripting: PHP** 
-- ### **Styling: Bootstrap** 
-- ### **Database Tool : My SQL** 
-- ### **Software Used: XAMPP, Wamp Server, Microsoft Visual Studio** 
-
-<br/>
-<br/>
 
 
 ## How the Site Works
@@ -161,6 +151,17 @@ Admins can see the reports, statistics, customer, order, and product details. Ad
 <p align="center">Edit Product</p>
 
 <br>
+
+## Software and Languages Used
+
+- ### Client Side Scripting: HTML , CSS** 
+- ### Server Side Scripting: PHP** 
+- ### Styling: Bootstrap** 
+- ### Database Tool : My SQL** 
+- ### Software Used: XAMPP, Wamp Server, Microsoft Visual Studio** 
+
+<br/>
+<br/>
 
 
 ## Author
